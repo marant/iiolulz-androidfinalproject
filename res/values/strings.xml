@@ -5,7 +5,10 @@
     <string name="cachename_text">Cache name:</string>
     <string name="cachecreator_text">Cache creator:</string>
     <string name="cachetype_text">Cache type:</string>
-    <string name="setastargetbutton_text">Set as target:</string>
+    <string name="setastargetbutton_text">Set as target</string>
+    <string name="addnotebutton_text">Add note</string>
+    <string name="viewnotesbutton_text">View notes</string>
+    <string name="markasfoundbutton_text">Mark as found</string>
     <string name="targetsetmessage_text">Target set</string>
     <string name="menu_distancetotarget_text">Distance to target</string>
     <string name="menu_centertomylocation_text">Go to my location</string>

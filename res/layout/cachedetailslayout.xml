@@ -4,45 +4,67 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
   android:orientation="vertical">
-		  <LinearLayout android:layout_width="fill_parent"
+		  <TableLayout android:layout_width="fill_parent"
 		  				android:layout_height="wrap_content"
-		  				android:orientation="horizontal">
-		 	<TextView android:id="@+id/cachename_text"
-		  		android:layout_width="wrap_content" 
-		  		android:layout_height="wrap_content"
-		  		android:text="@string/cachename_text"/>
-		  	<TextView android:id="@+id/cachename_value"
-		  		android:layout_width="wrap_content"
-		  		android:layout_height="wrap_content"
-		  		/>
-		  </LinearLayout>
-		<LinearLayout android:layout_width="fill_parent"
-		  				android:layout_height="wrap_content"
-		  				android:orientation="horizontal">
-		 	<TextView android:id="@+id/cachecreator_text"
-		  		android:layout_width="wrap_content" 
-		  		android:layout_height="wrap_content"
-		  		android:text="@string/cachecreator_text"/>
-		  	<TextView android:id="@+id/cachecreator_value"
-		  		android:layout_width="wrap_content"
-		  		android:layout_height="wrap_content"
-		  		/>
-		  </LinearLayout>
-		  <LinearLayout android:layout_width="fill_parent"
-		  				android:layout_height="wrap_content"
-		  				android:orientation="horizontal">
-		 	<TextView android:id="@+id/cachetype_text"
-		  		android:layout_width="wrap_content" 
-		  		android:layout_height="wrap_content"
-		  		android:text="@string/cachetype_text"/>
-		  	<TextView android:id="@+id/cachetype_value"
-		  		android:layout_width="wrap_content"
-		  		android:layout_height="wrap_content"
-		  		/>
-		  </LinearLayout>
+		  				android:layout_weight="1">
+		  		<TableRow>
+				 	<TextView android:id="@+id/cachename_text"
+				  		android:layout_width="wrap_content" 
+				  		android:layout_height="wrap_content"
+				  		android:text="@string/cachename_text"/>
+				  	<TextView android:id="@+id/cachename_value"
+				  		android:layout_width="wrap_content"
+				  		android:layout_height="wrap_content"
+				  		/>
+			  	</TableRow>
+				<TableRow>
+				 	<TextView android:id="@+id/cachecreator_text"
+				  		android:layout_width="wrap_content" 
+				  		android:layout_height="wrap_content"
+				  		android:text="@string/cachecreator_text"/>
+				  	<TextView android:id="@+id/cachecreator_value"
+				  		android:layout_width="wrap_content"
+				  		android:layout_height="wrap_content"
+				  		/>
+				</TableRow>
+				<TableRow>
+				 	<TextView android:id="@+id/cachetype_text"
+				  		android:layout_width="wrap_content" 
+				  		android:layout_height="wrap_content"
+				  		android:text="@string/cachetype_text"/>
+				  	<TextView android:id="@+id/cachetype_value"
+				  		android:layout_width="wrap_content"
+				  		android:layout_height="wrap_content"
+				  		/>
+			  	</TableRow>
+		  	</TableLayout>
+
 		<Button android:text="@string/setastargetbutton_text" 
 			android:id="@+id/Button01" 
 			android:layout_height="wrap_content" 
-			android:layout_width="fill_parent" />
+			android:layout_width="fill_parent"
+			android:drawableLeft="@drawable/flag" />
+			
+			<LinearLayout android:layout_width="fill_parent"
+						  android:layout_height="wrap_content">
+				<Button android:text="@string/addnotebutton_text"
+						android:id="@+id/AddNoteButton"
+						android:layout_height="wrap_content" 
+						android:layout_width="wrap_content"
+						android:layout_weight="1"
+						android:drawableLeft="@drawable/tag" />
+				<Button android:text="@string/viewnotesbutton_text"
+						android:id="@+id/ViewNotesButton"
+						android:layout_height="wrap_content" 
+						android:layout_width="wrap_content"
+						android:layout_weight="1"
+						android:drawableLeft="@drawable/tags" />
+			</LinearLayout>
+			
+		<Button android:text="@string/markasfoundbutton_text" 
+			android:id="@+id/MarkAsFoundButton" 
+			android:layout_height="wrap_content" 
+			android:layout_width="fill_parent"
+			android:drawableLeft="@drawable/tick" />
 </LinearLayout>
 

@@ -161,7 +161,7 @@ public class Main extends MapActivity implements LocationListener {
 	        	message = getResources().getString(R.string.message_distancetotarget_text);
 	        	double distance = currentLocation.distanceTo(targetCache.getLocation());
 	        	DecimalFormat format = new DecimalFormat("#.##");
-	        	if( distance < 999)
+	        	if( distance < 1000)
 	        		message += " "+format.format(distance)+" m";
 	        	else
 	        		message += " "+format.format(distance/1000)+" km";

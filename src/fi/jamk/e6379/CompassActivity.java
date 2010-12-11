@@ -83,9 +83,9 @@ public class CompassActivity extends Activity implements LocationListener {
 	}
 	public void updateDistanceText() {
 		DecimalFormat format = new DecimalFormat("#.##");
-		if( distanceToTarget >= 0 )
+		if( distanceToTarget < 1000 )
 			textView.setText( Double.valueOf(format.format(distanceToTarget)) + " m");
-		else if( distanceToTarget >= 999 )
+		else if( distanceToTarget >= 1000 )
 			textView.setText( Double.valueOf(format.format(distanceToTarget/1000)) + " km" );
 		else
 			textView.setText( R.string.message_nolocationfix_text );

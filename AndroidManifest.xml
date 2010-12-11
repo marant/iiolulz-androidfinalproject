@@ -23,6 +23,9 @@
         <activity android:name=".CompassActivity"
         		  android:label="Compass" >
 		</activity>
+		<activity android:name=".NoteEditActivity"
+				  android:label="Notes">
+		</activity>
     </application>
     <uses-sdk android:minSdkVersion="7" />
 

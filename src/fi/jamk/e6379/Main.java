@@ -17,12 +17,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class Main extends MapActivity implements LocationListener {
 	private MapView mapView;
-	private LinearLayout linearLayout;
 	private MapController mapController;
 	private MyLocationOverlay myLocOverlay;
 	private List<Overlay> mapOverlays;
@@ -43,8 +41,6 @@ public class Main extends MapActivity implements LocationListener {
         caches = null;
         targetCache = null;
         currentLocation = null;
-        
- 
 		
         mapView = (MapView)findViewById(R.id.mapview);
         mapView.setBuiltInZoomControls(true);

@@ -52,7 +52,8 @@
 						android:layout_height="wrap_content" 
 						android:layout_width="wrap_content"
 						android:layout_weight="1"
-						android:drawableLeft="@drawable/tag" />
+						android:drawableLeft="@drawable/tag"
+						android:onClick="openAddNoteActivity" />
 				<Button android:text="@string/viewnotesbutton_text"
 						android:id="@+id/ViewNotesButton"
 						android:layout_height="wrap_content" 

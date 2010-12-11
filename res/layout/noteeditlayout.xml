@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:orientation="vertical">
+  <TextView android:id="@+id/nodeedittitle_label"
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:text="@string/notes_title_text"
+  			android:lines="1"/>
+  <EditText android:id="@+id/nodeedittitle_value"
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:singleLine="true" />
+  <TextView android:id="@+id/notedatetitle_text"
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:text="@string/notes_date_text"/>
+  <LinearLayout android:layout_width="fill_parent"
+  				android:layout_height="wrap_content"
+  				android:orientation="horizontal">
+  		<TextView android:id="@+id/notedate_value"
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1"
+  			android:gravity="center" />
+  		<Button android:id="@+id/ChangeDateButton"
+  		  android:layout_width="fill_parent"
+  		  android:layout_height="wrap_content"
+  		  android:layout_weight="1"
+  		  android:text="@string/notes_changedatebutton_text"
+  		  android:onClick="openDatePickerDialog" />
+  </LinearLayout>
+  <TextView android:id="@+id/nodeedittext_label"
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:text="@string/notes_text_text"/>
+  <EditText android:id="@+id/nodeedittitle_value"
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+  			android:layout_weight="1" />
+  <Button android:id="@+id/SaveNoteButton"
+  		  android:layout_width="fill_parent"
+  		  android:layout_height="wrap_content"
+  		  android:text="@string/notes_savenotebutton_text" />
+</LinearLayout>

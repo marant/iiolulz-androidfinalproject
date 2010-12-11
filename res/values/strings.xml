@@ -10,11 +10,19 @@
     <string name="viewnotesbutton_text">View notes</string>
     <string name="markasfoundbutton_text">Mark as found</string>
     <string name="targetsetmessage_text">Target set</string>
+    
     <string name="menu_distancetotarget_text">Distance to target</string>
     <string name="menu_centertomylocation_text">Go to my location</string>
     <string name="menu_compassview_text">Compass view</string>
+    
     <string name="message_targetcachenostset_text">Target cache not set</string>
     <string name="message_distancetotarget_text">Distance to target: </string>
     <string name="message_nolocationfix_text">No GPS fix!</string>
+    
+    <string name="notes_title_text">Title</string>
+    <string name="notes_text_text">Note</string>
+    <string name="notes_date_text">Date</string>
+    <string name="notes_savenotebutton_text">Save note</string>
+    <string name="notes_changedatebutton_text">Change date</string>
   
 </resources>

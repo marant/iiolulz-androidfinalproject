@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
 public class CacheDetailsActivity extends Activity {
@@ -44,5 +43,10 @@ public class CacheDetailsActivity extends Activity {
 		cachename.setText( cache.getId() );
 		cachecreator.setText( cache.getCreator() );
 		cachetype.setText( cache.getType() );
+	}
+	
+	public void openAddNoteActivity(View target) {
+		Intent intent = new Intent(CacheDetailsActivity.this, NoteEditActivity.class);
+		startActivity(intent);
 	}
 }

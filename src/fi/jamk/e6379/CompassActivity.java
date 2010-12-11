@@ -85,7 +85,7 @@ public class CompassActivity extends Activity implements LocationListener {
 		DecimalFormat format = new DecimalFormat("#.##");
 		if( distanceToTarget >= 0 )
 			textView.setText( Double.valueOf(format.format(distanceToTarget)) + " m");
-		if( distanceToTarget >= 999 )
+		else if( distanceToTarget >= 999 )
 			textView.setText( Double.valueOf(format.format(distanceToTarget/1000)) + " km" );
 		else
 			textView.setText( R.string.message_nolocationfix_text );
@@ -95,17 +95,12 @@ public class CompassActivity extends Activity implements LocationListener {
 		Bitmap bitmapOrg = BitmapFactory.decodeResource(getResources(), R.drawable.compassarrow );
 		int width = bitmapOrg.getWidth();
 		int height = bitmapOrg.getHeight();
-		int newWidth = 200;
-		int newHeight = 300;
-		float scaleWidth = ((float) newWidth)/width;
-		float scaleHeight = ((float) newHeight)/height;
 		Matrix matrix = new Matrix();
-		matrix.postScale(scaleWidth, scaleHeight);
-		matrix.postRotate(angle);
-		Bitmap resizedBitmap = Bitmap.createBitmap( bitmapOrg, 0, 0, width, height, matrix, true);
-		BitmapDrawable bmd = new BitmapDrawable(resizedBitmap);
+		//matrix.postScale(1, 1);
+		matrix.setRotate(angle);
+		Bitmap rotatedBitmap = Bitmap.createBitmap( bitmapOrg, 0, 0, width, height, matrix, true);
+		BitmapDrawable bmd = new BitmapDrawable(rotatedBitmap);
 		image.setImageDrawable(bmd);
-		
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package fi.jamk.e6379;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -158,7 +159,12 @@ public class Main extends MapActivity implements LocationListener {
 	    	String message = "";
 	        if( targetCache != null && currentLocation != null ) {
 	        	message = getResources().getString(R.string.message_distancetotarget_text);
-	        	message += " "+currentLocation.distanceTo(targetCache.getLocation())+" meters";
+	        	double distance = currentLocation.distanceTo(targetCache.getLocation());
+	        	DecimalFormat format = new DecimalFormat("#.##");
+	        	if( distance < 999)
+	        		message += " "+format.format(distance)+" m";
+	        	else
+	        		message += " "+format.format(distance/1000)+" km";
 	        	
 	        }
 	        else if( targetCache == null ) {

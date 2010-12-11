@@ -7,7 +7,9 @@
   
   <ImageView android:id="@+id/compassImage"
   			 android:layout_width="fill_parent"
-  			 android:layout_height="wrap_content" />
+  			 android:layout_height="wrap_content"
+  			 android:layout_gravity="center_horizontal"
+  			 android:layout_weight="1" />
   			 
   <TextView android:id="@+id/compassDistanceToTarget"
   			android:layout_width="fill_parent"

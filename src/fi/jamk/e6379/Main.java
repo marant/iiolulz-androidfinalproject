@@ -185,7 +185,10 @@ public class Main extends MapActivity implements LocationListener {
 			mapController.animateTo(point);
 	        return true;
 	    case R.id.compassview:
-	    	this.openCompassView();
+	    	if( targetCache != null )
+	    		this.openCompassView();
+	    	else
+	    		Toast.makeText(getApplicationContext(), R.string.message_targetcachenostset_text, Toast.LENGTH_SHORT).show();
 	    	return true;
 	    	
 	    default:

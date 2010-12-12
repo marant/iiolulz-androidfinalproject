@@ -8,7 +8,7 @@
     <string name="setastargetbutton_text">Set as target</string>
     <string name="addnotebutton_text">Add note</string>
     <string name="viewnotesbutton_text">View notes</string>
-    <string name="markasfoundbutton_text">Mark as found</string>
+    <string name="logvisitbutton_text">Log visit</string>
     <string name="targetsetmessage_text">Target set</string>
     
     <string name="menu_distancetotarget_text">Distance to target</string>

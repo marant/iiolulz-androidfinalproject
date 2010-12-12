@@ -62,7 +62,7 @@
 						android:drawableLeft="@drawable/tags" />
 			</LinearLayout>
 			
-		<Button android:text="@string/markasfoundbutton_text" 
+		<Button android:text="@string/logvisitbutton_text" 
 			android:id="@+id/MarkAsFoundButton" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"

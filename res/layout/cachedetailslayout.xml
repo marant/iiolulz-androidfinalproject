@@ -66,6 +66,7 @@
 			android:id="@+id/LogVisitButton" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
-			android:drawableLeft="@drawable/tick" />
+			android:drawableLeft="@drawable/tick"
+			android:onClick="openLogActivity" />
 </LinearLayout>
 

@@ -14,10 +14,10 @@ public class NoteEditActivity extends Activity {
 	public static final int DATE_DIALOG_ID = 0;
 	public static final int ADD_NOTE = 0;
 	public static final int EDIT_NOTE = 1;
-	private TextView date;
-	private int day;
-	private int month;
-	private int year;
+	protected TextView date;
+	protected int day;
+	protected int month;
+	protected int year;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class NoteEditActivity extends Activity {
     }
     
     @Override
-    protected Dialog onCreateDialog(int id) {
+    public Dialog onCreateDialog(int id) {
         switch (id) {
         case DATE_DIALOG_ID:
             return new DatePickerDialog(this,
@@ -58,7 +58,7 @@ public class NoteEditActivity extends Activity {
         return null;
     }
     
-    private DatePickerDialog.OnDateSetListener mDateSetListener =
+    protected DatePickerDialog.OnDateSetListener mDateSetListener =
         new DatePickerDialog.OnDateSetListener() {
     		@Override
             public void onDateSet(DatePicker view, int mYear, 

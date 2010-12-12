@@ -7,7 +7,7 @@
     <string name="cachetype_text">Cache type:</string>
     <string name="setastargetbutton_text">Set as target</string>
     <string name="addnotebutton_text">Add note</string>
-    <string name="viewnotesbutton_text">View notes</string>
+    <string name="viewnotesbutton_text">View notes &amp; visits</string>
     <string name="logvisitbutton_text">Log visit</string>
     <string name="targetsetmessage_text">Target set</string>
     
@@ -24,5 +24,17 @@
     <string name="notes_date_text">Date</string>
     <string name="notes_savenotebutton_text">Save note</string>
     <string name="notes_changedatebutton_text">Change date</string>
-  
+    
+    <string name="log_title_text">Title</string>
+    <string name="log_text_text">Comment</string>
+    <string name="log_date_text">Date</string>
+    <string name="log_type_text">Type</string>
+    <string name="log_savevisitbutton_text">Save log</string>
+    <string name="log_changedatebutton_text">Change date</string>
+    <string name="log_changetypebutton_text">Change type</string>
+    
+    <string name="logtypedialog_title">Log type</string>
+    <string name="logtype_found">Found</string>
+    <string name="logtype_didnotfind">Did not find</string>
+    <string name="logtypedialog_buttontext">Ok</string>
 </resources>

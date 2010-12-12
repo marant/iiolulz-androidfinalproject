@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/layout_root"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="10dp"
+              android:orientation="vertical">
+             
+	<RadioGroup
+		  android:id="@+id/radioGroup"
+	      android:layout_width="fill_parent"
+	      android:layout_height="wrap_content"
+	      android:orientation="vertical">
+      <RadioButton android:id="@+id/logtypedialog_found"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/logtype_found"
+          android:checked="true" />
+      <RadioButton android:id="@+id/logtypedialog_didnotfind"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/logtype_didnotfind" />
+    </RadioGroup>
+    
+     <Button android:id="@+id/logtypedialog_okButton"
+    		android:layout_width="fill_parent"
+    		android:layout_height="wrap_content"
+    		android:text="@string/logtypedialog_buttontext" />
+    
+</LinearLayout>

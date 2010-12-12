@@ -2,9 +2,10 @@
 <resources>
     <string name="hello">Hello World, Main!</string>
     <string name="app_name">Assignment03</string>
-    <string name="cachename_text">Cache name:</string>
-    <string name="cachecreator_text">Cache creator:</string>
-    <string name="cachetype_text">Cache type:</string>
+    <string name="cacheid_text">ID:</string>
+    <string name="cachename_text">Name:</string>
+    <string name="cachecreator_text">Creator:</string>
+    <string name="cachetype_text">Type:</string>
     <string name="setastargetbutton_text">Set as target</string>
     <string name="addnotebutton_text">Add note</string>
     <string name="viewnotesbutton_text">View notes &amp; visits</string>

@@ -96,7 +96,7 @@ public class Main extends MapActivity implements LocationListener {
 	
 	public void generateOverlayItems() {
 		CacheManager cacheManager = new CacheManager();
-		caches = cacheManager.fetchCaches();
+		caches = cacheManager.getCaches();
 		
 		Iterator<Cache> iter = caches.iterator();
 		while( iter.hasNext() ) {

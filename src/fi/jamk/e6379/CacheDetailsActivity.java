@@ -19,10 +19,11 @@ public class CacheDetailsActivity extends Activity {
 		Intent callingIntent = getIntent();
 		Cache cache = null;
 		CacheManager cacheManager = new CacheManager();
+		TextView cacheid = (TextView) findViewById(R.id.cacheid_value);
 		TextView cachename = (TextView) findViewById(R.id.cachename_value);
 		TextView cachecreator = (TextView) findViewById( R.id.cachecreator_value );
 		TextView cachetype = (TextView) findViewById(R.id.cachetype_value);
-		ArrayList<Cache> caches = cacheManager.fetchCaches();
+		ArrayList<Cache> caches = cacheManager.getCaches();
 		index = callingIntent.getIntExtra("CacheID", -1);
 		
 		targetButtonListener = new OnClickListener() {
@@ -40,7 +41,8 @@ public class CacheDetailsActivity extends Activity {
 		
 		cache = caches.get(index);
 		
-		cachename.setText( cache.getId() );
+		cacheid.setText( cache.getId() );
+		cachename.setText( cache.getName() );
 		cachecreator.setText( cache.getCreator() );
 		cachetype.setText( cache.getType() );
 	}

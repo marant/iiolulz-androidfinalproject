@@ -4,6 +4,8 @@ import android.location.Location;
 
 public class Cache {
 	private String id;
+	private String name;
+	private String url;
 	private Location location;
 	private String creator;
 	private String type;
@@ -15,6 +17,14 @@ public class Cache {
 	
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public Location getLocation() {
@@ -41,6 +51,14 @@ public class Cache {
 		this.type = type;
 	}
 	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public boolean isFound() {
 		return found;
 	}

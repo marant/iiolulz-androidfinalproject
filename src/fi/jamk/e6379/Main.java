@@ -99,7 +99,10 @@ public class Main extends MapActivity implements LocationListener {
 	public boolean generateOverlayItems() {
 		CacheManager cacheManager = new CacheManager();
 		caches = cacheManager.getCaches();
-		if (caches.isEmpty()) return false;
+		if (caches.isEmpty()) {
+			Toast.makeText(getApplicationContext(), getString(R.string.nocaches_text), Toast.LENGTH_LONG).show();
+			return false;
+		}
 		
 		Iterator<Cache> iter = caches.iterator();
 		while( iter.hasNext() ) {

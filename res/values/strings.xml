@@ -38,4 +38,5 @@
     <string name="logtype_found">Found</string>
     <string name="logtype_didnotfind">Did not find</string>
     <string name="logtypedialog_buttontext">Ok</string>
+    <string name="nocaches_text">No caches</string>
 </resources>

@@ -63,7 +63,7 @@
 			</LinearLayout>
 			
 		<Button android:text="@string/logvisitbutton_text" 
-			android:id="@+id/MarkAsFoundButton" 
+			android:id="@+id/LogVisitButton" 
 			android:layout_height="wrap_content" 
 			android:layout_width="fill_parent"
 			android:drawableLeft="@drawable/tick" />

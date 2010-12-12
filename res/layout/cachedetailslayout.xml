@@ -59,7 +59,8 @@
 						android:layout_height="wrap_content" 
 						android:layout_width="wrap_content"
 						android:layout_weight="1"
-						android:drawableLeft="@drawable/tags" />
+						android:drawableLeft="@drawable/tags"
+						android:onClick="openNotesAndLogsActivity" />
 			</LinearLayout>
 			
 		<Button android:text="@string/logvisitbutton_text" 

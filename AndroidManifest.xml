@@ -29,6 +29,9 @@
 		<activity android:name=".LogActivity"
 				  android:label="Log visit">
 		</activity>
+		<activity android:name=".NotesAndLogsActivity"
+				  android:label="Notes and Logs">
+		</activity>
     </application>
     <uses-sdk android:minSdkVersion="7" />
 

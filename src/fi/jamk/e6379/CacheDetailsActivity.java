@@ -54,4 +54,9 @@ public class CacheDetailsActivity extends Activity {
 		Intent intent = new Intent( CacheDetailsActivity.this, LogActivity.class );
 		startActivity( intent );
 	}
+	
+	public void openNotesAndLogsActivity( View target ) {
+		Intent intent = new Intent( CacheDetailsActivity.this, NotesAndLogsActivity.class );
+		startActivity( intent );
+	}
 }

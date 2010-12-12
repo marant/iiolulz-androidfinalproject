@@ -58,8 +58,10 @@ public class Main extends MapActivity implements LocationListener {
 		cacheOverlay = new CacheOverlay(drawable, this );
 		
 		//cacheOverlay.addOverlay(overlayItem);
-		generateOverlayItems();
-		mapOverlays.add(cacheOverlay);
+		if(generateOverlayItems()){
+			mapOverlays.add(cacheOverlay);
+		}
+		
     }
 
 	@Override
@@ -94,9 +96,10 @@ public class Main extends MapActivity implements LocationListener {
 		
 	}
 	
-	public void generateOverlayItems() {
+	public boolean generateOverlayItems() {
 		CacheManager cacheManager = new CacheManager();
 		caches = cacheManager.getCaches();
+		if (caches.isEmpty()) return false;
 		
 		Iterator<Cache> iter = caches.iterator();
 		while( iter.hasNext() ) {
@@ -106,6 +109,8 @@ public class Main extends MapActivity implements LocationListener {
 			GeoPoint point = new GeoPoint(lat, lon);	
 			cacheOverlay.addOverlay( new OverlayItem(point, "", "") );
 		}
+		
+		return true;
 	}
 	
 	public void openCacheView(int index) {

@@ -39,40 +39,22 @@ public class CacheManager {
 		if(mExternalStorageAvailable){
 			File path = Environment.getExternalStorageDirectory();
 			File[] cacheFiles = path.listFiles(new CacheFilter());
-			SAXParserFactory factory = SAXParserFactory.newInstance();
+			if (cacheFiles.length > 0){
+				SAXParserFactory factory = SAXParserFactory.newInstance();
 			
-			for (File cache : cacheFiles){
-				try {
-				    SAXParser saxParser = factory.newSAXParser();
-				    LocHandler locHandler = new LocHandler();
-				    saxParser.parse(cache,locHandler);
-				    this.caches.add(locHandler.getNewcache());
-				 } catch (Throwable err) {
-					 err.printStackTrace ();
+				for (File cache : cacheFiles){
+					try {
+					    SAXParser saxParser = factory.newSAXParser();
+					    LocHandler locHandler = new LocHandler();
+					    saxParser.parse(cache,locHandler);
+					    this.caches.add(locHandler.getNewcache());
+					 } catch (Throwable err) {
+						 err.printStackTrace ();
+					}
 				}
 			}
+			
 		}
-		
-		/*
-		Cache c1 = new Cache();
-		Location l1 = new Location("Groundspeak");
-		l1.setLatitude(62.234083);
-		l1.setLongitude(25.76455);
-		c1.setLocation(l1);
-		c1.setName("Kuokkalan silta");
-		c1.setType("tradi");
-		
-		Cache c2 = new Cache();
-		Location l2 = new Location("Groundspeak");
-		l2.setLatitude(62.232);
-		l2.setLongitude(25.787333);
-		c2.setLocation(l2);
-		c2.setName("Lyyli II");
-		c2.setType("tradi");
-		
-		caches.add(c1);
-		caches.add(c2);
-		*/
 	}
 
 	public void checkStorageState() {

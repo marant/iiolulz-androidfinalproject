@@ -18,6 +18,7 @@ public class NoteEditActivity extends Activity {
 	protected int day;
 	protected int month;
 	protected int year;
+	protected Calendar calendar;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class NoteEditActivity extends Activity {
         setContentView(R.layout.noteeditlayout);
         
         date = (TextView)findViewById(R.id.notedate_value);
-        Calendar calendar = Calendar.getInstance();
+        calendar = Calendar.getInstance();
         day = calendar.get(Calendar.DAY_OF_MONTH);
   	  	month = calendar.get( Calendar.MONTH );
   	  	year = calendar.get( Calendar.YEAR );
@@ -57,6 +58,16 @@ public class NoteEditActivity extends Activity {
         }
         return null;
     }
+	public void saveNote(View target) {
+		DataHelper dh = new DataHelper(this);
+		Note note = new Note();
+		
+		note.setDate(calendar);
+		note.setTitle(((TextView)findViewById(R.id.nodeedittitle_text)).getText().toString());
+		note.setNoteText(((TextView)findViewById(R.id.nodeedittext_text)).getText().toString());
+		dh.insertNote(note);
+		finish();
+	}
     
     protected DatePickerDialog.OnDateSetListener mDateSetListener =
         new DatePickerDialog.OnDateSetListener() {

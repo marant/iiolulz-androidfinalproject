@@ -9,27 +9,34 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class NotesAndLogsActivity extends ListActivity {
+public class NotesAndLogsActivity extends ListActivity {	
+	protected DataHelper dh;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	  super.onCreate(savedInstanceState);
+	  dh = new DataHelper(this);
 	  
-	  Note note1 = new Note();
-	  note1.setDate( Calendar.getInstance() );
-	  note1.setNoteText("testing");
-	  note1.setTitle("test");
-	  
-	  Note note2 = new Note();
-	  note2.setDate( Calendar.getInstance() );
-	  note2.setNoteText("testing2");
-	  note2.setTitle("test2");
-	  List<Note> notes = new ArrayList<Note>();
-	  notes.add(note1);
-	  notes.add(note2);
-
-	  setListAdapter(new NoteAdapter(this, R.layout.notesandlogslistviewitem, notes));
-
-	  ListView lv = getListView();
-	  lv.setTextFilterEnabled(true);
+	  updateLogsAndNotes();
 	}
+	
+	public void updateLogsAndNotes() {
+		ArrayList<Note> notes = new ArrayList<Note>();
+		  
+		  notes.addAll(dh.selectNotes());
+		  notes.addAll(dh.selectLogs());
+
+		  setListAdapter(new NoteAdapter(this, R.layout.notesandlogslistviewitem, notes));
+
+		  ListView lv = getListView();
+		  lv.setTextFilterEnabled(true);
+	}
+
+	@Override
+	protected void onStop() {
+		updateLogsAndNotes();
+		super.onStop();
+	}
+	
+
 }

@@ -1,6 +1,7 @@
 package fi.jamk.e6379;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -71,6 +72,15 @@ public class LogActivity extends NoteEditActivity {
 	
 	public void openLogTypeDialog(View target) {
 		showDialog(TYPE_DIALOG_ID);
+	}
+	
+	public void saveLog(View target) {
+		DataHelper dh = new DataHelper(this);
+		log.setDate(calendar);
+		log.setTitle(((TextView)findViewById(R.id.logtitle_text)).getText().toString());
+		log.setNoteText(((TextView)findViewById(R.id.logeditcomment_text)).getText().toString());
+		dh.insertLog(log);
+		finish();
 	}
 	
 	public Log getLog() {

@@ -63,5 +63,6 @@
   <Button android:id="@+id/SaveLogButton"
   		  android:layout_width="fill_parent"
   		  android:layout_height="wrap_content"
-  		  android:text="@string/log_savevisitbutton_text" />
+  		  android:text="@string/log_savevisitbutton_text" 
+  		  android:onClick="saveLog" />
 </LinearLayout>

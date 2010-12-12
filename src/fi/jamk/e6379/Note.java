@@ -7,6 +7,16 @@ public class Note {
 	private String noteText;
 	private String title;
 	
+	public Note(){
+		
+	}
+	
+	public Note(String title, String noteText, Calendar date){
+		this.title = title;
+		this.noteText = noteText;
+		this.date = date;
+	}
+	
 	public Calendar getDate() {
 		return date;
 	}

@@ -9,7 +9,7 @@
   			android:layout_height="wrap_content"
   			android:text="@string/notes_title_text"
   			android:lines="1"/>
-  <EditText android:id="@+id/nodeedittitle_value"
+  <EditText android:id="@+id/nodeedittitle_text"
   			android:layout_width="fill_parent"
   			android:layout_height="wrap_content"
   			android:singleLine="true" />
@@ -37,7 +37,7 @@
   			android:layout_width="fill_parent"
   			android:layout_height="wrap_content"
   			android:text="@string/notes_text_text"/>
-  <EditText android:id="@+id/nodeedittitle_value"
+  <EditText android:id="@+id/nodeedittext_text"
   			android:layout_width="fill_parent"
   			android:layout_height="wrap_content"
   			android:layout_weight="1"
@@ -45,5 +45,6 @@
   <Button android:id="@+id/SaveNoteButton"
   		  android:layout_width="fill_parent"
   		  android:layout_height="wrap_content"
-  		  android:text="@string/notes_savenotebutton_text" />
+  		  android:text="@string/notes_savenotebutton_text"
+  		  android:onClick="saveNote" />
 </LinearLayout>

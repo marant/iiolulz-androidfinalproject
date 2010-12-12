@@ -8,6 +8,16 @@
 		  				android:layout_height="wrap_content"
 		  				android:layout_weight="1">
 		  		<TableRow>
+				 	<TextView android:id="@+id/cacheid_text"
+				  		android:layout_width="wrap_content" 
+				  		android:layout_height="wrap_content"
+				  		android:text="@string/cacheid_text"/>
+				  	<TextView android:id="@+id/cacheid_value"
+				  		android:layout_width="wrap_content"
+				  		android:layout_height="wrap_content"
+				  		/>
+			  	</TableRow>
+		  		<TableRow>
 				 	<TextView android:id="@+id/cachename_text"
 				  		android:layout_width="wrap_content" 
 				  		android:layout_height="wrap_content"

@@ -9,6 +9,7 @@ import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.OverlayItem;
 
 public class CacheOverlay extends ItemizedOverlay<OverlayItem> {
+	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
 	Context context;
 	Main mainActivity;
 	
@@ -17,7 +18,7 @@ public class CacheOverlay extends ItemizedOverlay<OverlayItem> {
 		this.mainActivity = mainActivity;
 	}
 
-	private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
+
 
 	@Override
 	protected OverlayItem createItem(int i) {

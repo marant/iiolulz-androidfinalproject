@@ -25,8 +25,10 @@ public class Main extends MapActivity implements LocationListener {
 	private MyLocationOverlay myLocOverlay;
 	private List<Overlay> mapOverlays;
 	private ArrayList<Cache> caches;
-	private Drawable drawable;
+	private Drawable cacheDrawable;
+	private Drawable foundCacheDrawable;
 	private CacheOverlay cacheOverlay;
+	private CacheOverlay foundCacheOverlay;
 	private boolean showRoute;
 	private Cache targetCache;
 	private Location currentLocation;
@@ -54,12 +56,16 @@ public class Main extends MapActivity implements LocationListener {
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L, 500.0f, this);
 		
 		mapOverlays = mapView.getOverlays();
-		drawable = this.getResources().getDrawable(R.drawable.cachemarker);
-		cacheOverlay = new CacheOverlay(drawable, this );
+		cacheDrawable = this.getResources().getDrawable(R.drawable.cachemarker);
+		foundCacheDrawable = this.getResources().getDrawable( R.drawable.foundcache );
+		
+		cacheOverlay = new CacheOverlay(cacheDrawable, this );
+		foundCacheOverlay = new CacheOverlay( foundCacheDrawable, this );
 		
 		//cacheOverlay.addOverlay(overlayItem);
 		if(generateOverlayItems()){
 			mapOverlays.add(cacheOverlay);
+			//mapOverlays.add(foundCacheOverlay);
 		}
 		
     }
@@ -124,13 +130,22 @@ public class Main extends MapActivity implements LocationListener {
 	
 	public void openCompassView() {
 		Intent intent = new Intent( Main.this, CompassActivity.class );
-		if( targetCache != null ) {
+	
+		if( targetCache != null && currentLocation != null ) {
 			intent.putExtra("targetLongitude", targetCache.getLocation().getLongitude());
 			intent.putExtra("targetLatitude", targetCache.getLocation().getLatitude());
 			intent.putExtra("currentLongitude", currentLocation.getLongitude() );
 			intent.putExtra("currentLatitude", currentLocation.getLatitude() );
+			startActivity(intent);
 		}
-		startActivity(intent);
+		
+		if (targetCache == null ) {
+			Toast.makeText(getApplicationContext(), getString(R.string.message_targetcachenostset_text), Toast.LENGTH_LONG).show();
+		}
+		
+		if( currentLocation == null ) {
+			Toast.makeText(getApplicationContext(), getString(R.string.message_nolocationfix_text), Toast.LENGTH_LONG).show();
+		}
 	}
 	
 	@Override

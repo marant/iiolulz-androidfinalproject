@@ -22,7 +22,7 @@ public class LogActivity extends NoteEditActivity {
 		setContentView(R.layout.loglayout);
 		Intent intent = getIntent();
 		
-		String cacheId = intent.getStringExtra("cacheId");
+		String cacheId = intent.getExtras().getString("cacheID");
 		if( cacheId == null ) {
 			this.finish();
 		}

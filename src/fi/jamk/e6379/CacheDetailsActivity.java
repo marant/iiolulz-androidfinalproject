@@ -59,6 +59,9 @@ public class CacheDetailsActivity extends Activity {
 	
 	public void openLogActivity( View target ) {
 		Intent intent = new Intent( CacheDetailsActivity.this, LogActivity.class );
+		if( cache != null ) {
+			intent.putExtra("cacheID", cache.getId() );
+		}
 		startActivity( intent );
 	}
 	

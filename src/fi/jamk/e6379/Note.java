@@ -6,6 +6,7 @@ public class Note {
 	private Calendar date;
 	private String noteText;
 	private String title;
+	private String cacheId;
 	
 	public Note(){
 		
@@ -17,6 +18,14 @@ public class Note {
 		this.date = date;
 	}
 	
+	public String getCacheId() {
+		return cacheId;
+	}
+
+	public void setCacheId(String cacheId) {
+		this.cacheId = cacheId;
+	}
+
 	public Calendar getDate() {
 		return date;
 	}

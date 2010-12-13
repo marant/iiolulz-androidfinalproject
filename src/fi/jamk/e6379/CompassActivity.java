@@ -25,12 +25,13 @@ public class CompassActivity extends Activity implements LocationListener {
 	private float distanceToTarget;
 	private Location target;
 	private Location currentLocation;
+	private Intent callingIntent;
 	
 	public void onCreate( Bundle bundle ) {
 		super.onCreate( bundle );
 		setContentView(R.layout.compasslayout);
 
-		Intent callingIntent = getIntent();
+		callingIntent = getIntent();
 
 		double targetLongitude = callingIntent.getDoubleExtra("targetLongitude", -1);
 		double targetLatitude = callingIntent.getDoubleExtra("targetLatitude", -1);
@@ -64,6 +65,11 @@ public class CompassActivity extends Activity implements LocationListener {
 		
 		LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L, 500.0f, this);
+	}
+	
+	public void onResume(){
+		callingIntent = getIntent();
+		super.onResume();
 	}
 	
 	public void calculateDistanceAndBearing() {

@@ -18,8 +18,6 @@ public class CacheOverlay extends ItemizedOverlay<OverlayItem> {
 		this.mainActivity = mainActivity;
 	}
 
-
-
 	@Override
 	protected OverlayItem createItem(int i) {
 		return mOverlays.get(i);
@@ -40,5 +38,9 @@ public class CacheOverlay extends ItemizedOverlay<OverlayItem> {
 		OverlayItem item = mOverlays.get(index);
 		mainActivity.openCacheView(index);
 		return true;
+	}
+	
+	public void clear(){
+		mOverlays.clear();
 	}
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 
 public class NoteEditActivity extends Activity {
 	public static final int DATE_DIALOG_ID = 0;
@@ -18,6 +19,7 @@ public class NoteEditActivity extends Activity {
 	protected int day;
 	protected int month;
 	protected int year;
+	protected Intent intent;
 	protected Calendar calendar;
 	
     @Override
@@ -30,9 +32,17 @@ public class NoteEditActivity extends Activity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
   	  	month = calendar.get( Calendar.MONTH );
   	  	year = calendar.get( Calendar.YEAR );
+  	  	
+  	  	intent = getIntent();
+  	  	
         updateDateDisplay();
         
     }
+    
+	public void onResume(){
+		intent = getIntent();
+		super.onResume();
+	}
     
     public void updateDateDisplay() {
     	  String dateText = new String();
@@ -65,6 +75,7 @@ public class NoteEditActivity extends Activity {
 		note.setDate(calendar);
 		note.setTitle(((TextView)findViewById(R.id.nodeedittitle_text)).getText().toString());
 		note.setNoteText(((TextView)findViewById(R.id.nodeedittext_text)).getText().toString());
+		note.setCacheId(intent.getExtras().getString("cacheID"));
 		dh.insertNote(note);
 		finish();
 	}

@@ -25,13 +25,17 @@ public class Main extends MapActivity implements LocationListener {
 	private MyLocationOverlay myLocOverlay;
 	private List<Overlay> mapOverlays;
 	private ArrayList<Cache> caches;
+	private ArrayList<Cache> foundCaches;
+	private ArrayList<Cache> notFoundCaches;
 	private Drawable cacheDrawable;
 	private Drawable foundCacheDrawable;
 	private CacheOverlay cacheOverlay;
 	private CacheOverlay foundCacheOverlay;
-	private boolean showRoute;
 	private Cache targetCache;
 	private Location currentLocation;
+	private DataHelper dh;
+	private List<String> foundCacheIds;
+	private CacheManager cacheManager;
 	static final int SET_TARGET_CACHE_REQUEST = 1;
 	
     /** Called when the activity is first created. */
@@ -39,8 +43,9 @@ public class Main extends MapActivity implements LocationListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        showRoute = false;
         caches = null;
+        foundCaches = null;
+        notFoundCaches = null;
         targetCache = null;
         currentLocation = null;
 		
@@ -62,20 +67,29 @@ public class Main extends MapActivity implements LocationListener {
 		cacheOverlay = new CacheOverlay(cacheDrawable, this );
 		foundCacheOverlay = new CacheOverlay( foundCacheDrawable, this );
 		
-		//cacheOverlay.addOverlay(overlayItem);
-		if(generateOverlayItems()){
-			mapOverlays.add(cacheOverlay);
-			//mapOverlays.add(foundCacheOverlay);
-		}
+		dh = new DataHelper(this);
+		foundCacheIds = null;
+		
+		cacheManager = new CacheManager();
+		caches = cacheManager.getCaches();
+		foundCaches = new ArrayList<Cache>();
+		notFoundCaches = new ArrayList<Cache>();
+		
+		generateOverlayItems();
 		
     }
 
 	@Override
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
-		return showRoute;
+		return false;
 	}
 
+	public void onResume(){
+		generateOverlayItems();
+		super.onResume();
+	}
+	
 	@Override
 	public void onLocationChanged(Location location) {
 		GeoPoint point = myLocOverlay.getMyLocation();
@@ -103,22 +117,36 @@ public class Main extends MapActivity implements LocationListener {
 	}
 	
 	public boolean generateOverlayItems() {
-		CacheManager cacheManager = new CacheManager();
-		caches = cacheManager.getCaches();
+		mapOverlays.remove(cacheOverlay);
+		mapOverlays.remove(foundCacheOverlay);
+		foundCacheOverlay.clear();
+		cacheOverlay.clear();
 		if (caches.isEmpty()) {
 			Toast.makeText(getApplicationContext(), getString(R.string.nocaches_text), Toast.LENGTH_LONG).show();
 			return false;
 		}
 		
-		Iterator<Cache> iter = caches.iterator();
+		Iterator<Cache> iter = caches.iterator();		
+		List<String> foundCacheIds = dh.selectFoundCacheIds();
 		while( iter.hasNext() ) {
 			Cache cache = (Cache) iter.next();
 			int lon = (int) (cache.getLocation().getLongitude()*1000000);
 			int lat = (int) (cache.getLocation().getLatitude()*1000000);
-			GeoPoint point = new GeoPoint(lat, lon);	
-			cacheOverlay.addOverlay( new OverlayItem(point, "", "") );
+			GeoPoint point = new GeoPoint(lat, lon);
+			cacheOverlay.addOverlay( new OverlayItem(point, cache.getId(), ""));
+			/*
+			if(foundCacheIds.contains(cache.getId())){
+				foundCaches.add(cache);
+				foundCacheOverlay.addOverlay( new OverlayItem(point, cache.getId(), ""));
+			}
+			else {
+				cacheOverlay.addOverlay( new OverlayItem(point, cache.getId(), "") );
+				notFoundCaches.add(cache);
+			}
+			*/
 		}
 		
+		addOverlaysToMap();
 		return true;
 	}
 	
@@ -151,7 +179,7 @@ public class Main extends MapActivity implements LocationListener {
 	@Override
 	protected void onActivityResult( int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
+		generateOverlayItems();
 		if( requestCode == SET_TARGET_CACHE_REQUEST ) {
 			if( resultCode == RESULT_OK ) {
 				int cacheIndex = data.getIntExtra("CacheID", -1);
@@ -159,8 +187,10 @@ public class Main extends MapActivity implements LocationListener {
 					targetCache = caches.get(cacheIndex);
 					Toast.makeText( getApplicationContext(), R.string.targetsetmessage_text, Toast.LENGTH_SHORT).show();
 				}
+				
 			}
 		}
+		
 	}
 	
 	@Override
@@ -214,4 +244,19 @@ public class Main extends MapActivity implements LocationListener {
 	        return super.onOptionsItemSelected(item);
 	    }
 	}
+	
+	public void addOverlaysToMap(){
+		mapOverlays.add(cacheOverlay);
+		/*if(updateFoundCacheIds())
+			mapOverlays.add(foundCacheOverlay);*/
+	}
+	
+
+	public boolean updateFoundCacheIds() {
+		foundCacheIds = dh.selectFoundCacheIds();
+		if(foundCacheIds.size() > 0)
+			return true;
+		else return false;
+	}
+	
 }

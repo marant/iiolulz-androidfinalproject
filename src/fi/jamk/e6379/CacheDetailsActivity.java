@@ -13,20 +13,20 @@ public class CacheDetailsActivity extends Activity {
 	private OnClickListener targetButtonListener;
 	public static int index;
 	private Cache cache;
+	private ArrayList<Cache> caches;
+	private Intent callingIntent;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cachedetailslayout);
-		Intent callingIntent = getIntent();
+		callingIntent = getIntent();
 		
 		CacheManager cacheManager = new CacheManager();
 		cache = null;
-		TextView cacheid = (TextView) findViewById(R.id.cacheid_value);
-		TextView cachename = (TextView) findViewById(R.id.cachename_value);
-		TextView cachecreator = (TextView) findViewById( R.id.cachecreator_value );
-		TextView cachetype = (TextView) findViewById(R.id.cachetype_value);
-		ArrayList<Cache> caches = cacheManager.getCaches();
+		
+		caches = cacheManager.getCaches();
 		index = callingIntent.getIntExtra("CacheID", -1);
+		cache = caches.get(index);
 		
 		targetButtonListener = new OnClickListener() {
 			@Override
@@ -40,15 +40,36 @@ public class CacheDetailsActivity extends Activity {
 		};
 		
 		findViewById(R.id.Button01).setOnClickListener( targetButtonListener );
+		updateCacheDetails();
 		
+	}
+	
+	
+	
+	@Override
+	protected void onResume() {
+		callingIntent = getIntent();
+		index = callingIntent.getIntExtra("CacheID", -1);
 		cache = caches.get(index);
+		updateCacheDetails();
+		
+		super.onResume();
+	}
+	
+	public void updateCacheDetails(){
+		TextView cacheid = (TextView) findViewById(R.id.cacheid_value);
+		TextView cachename = (TextView) findViewById(R.id.cachename_value);
+		TextView cachecreator = (TextView) findViewById( R.id.cachecreator_value );
+		TextView cachetype = (TextView) findViewById(R.id.cachetype_value);
 		
 		cacheid.setText( cache.getId() );
 		cachename.setText( cache.getName() );
 		cachecreator.setText( cache.getCreator() );
 		cachetype.setText( cache.getType() );
 	}
-	
+
+
+
 	public void openAddNoteActivity(View target) {
 		Intent intent = new Intent(CacheDetailsActivity.this, NoteEditActivity.class);
 		if( cache != null ) {
@@ -67,6 +88,9 @@ public class CacheDetailsActivity extends Activity {
 	
 	public void openNotesAndLogsActivity( View target ) {
 		Intent intent = new Intent( CacheDetailsActivity.this, NotesAndLogsActivity.class );
+		if( cache != null ) {
+			intent.putExtra("cacheID", cache.getId() );
+		}
 		startActivity( intent );
 	}
 }

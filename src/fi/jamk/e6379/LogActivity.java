@@ -16,13 +16,17 @@ public class LogActivity extends NoteEditActivity {
 	public static final int TYPE_DIALOG_ID = 1;
 	private TextView type;
 	private Log log;
+	private Intent intent;
+	private String cacheId;
+	DataHelper dh;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loglayout);
-		Intent intent = getIntent();
+		intent = getIntent();
+		dh = new DataHelper(this);
 		
-		String cacheId = intent.getExtras().getString("cacheID");
+		cacheId = intent.getExtras().getString("cacheID");
 		if( cacheId == null ) {
 			this.finish();
 		}
@@ -38,6 +42,12 @@ public class LogActivity extends NoteEditActivity {
   	  	month = calendar.get( Calendar.MONTH );
   	  	year = calendar.get( Calendar.YEAR );
         updateDateDisplay();     
+	}
+	
+	public void onResume(){
+		intent = getIntent();
+		cacheId = intent.getExtras().getString("cacheID");
+		super.onResume();
 	}
 	
 	public void updateTypeDisplay() {
@@ -82,11 +92,12 @@ public class LogActivity extends NoteEditActivity {
 	}
 	
 	public void saveLog(View target) {
-		DataHelper dh = new DataHelper(this);
 		log.setDate(calendar);
 		log.setTitle(((TextView)findViewById(R.id.logtitle_text)).getText().toString());
 		log.setNoteText(((TextView)findViewById(R.id.logeditcomment_text)).getText().toString());
+		log.setCacheId(intent.getExtras().getString("cacheID"));
 		dh.insertLog(log);
+		dh.closeDb();
 		finish();
 	}
 	

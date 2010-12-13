@@ -24,11 +24,16 @@ public class DataHelper {
    
    private Context context;
    private SQLiteDatabase db;
+   private OpenHelper openHelper;
 
    public DataHelper(Context context) {
       this.context = context;
-      OpenHelper openHelper = new OpenHelper(this.context);
+      openHelper = new OpenHelper(this.context);
       this.db = openHelper.getWritableDatabase();
+   }
+   
+   public void closeDb() {
+	   openHelper.close();
    }
    
    public long insertLog(fi.jamk.e6379.Log log) {	   
@@ -38,6 +43,7 @@ public class DataHelper {
 	   initialValues.put("title", log.getTitle());
 	   initialValues.put("date", dateFormat.format(log.getDate().getTime()));
 	   initialValues.put("type", log.getType());
+	   initialValues.put("cacheId", log.getCacheId());
 	   
 	   return db.insert(TABLE_NAME_LOGS, null, initialValues);
    }
@@ -50,6 +56,7 @@ public class DataHelper {
 	   initialValues.put("noteText", note.getNoteText());
 	   initialValues.put("title", note.getTitle());
 	   initialValues.put("date", dateFormat.format(note.getDate().getTime()));
+	   initialValues.put("cacheId", note.getCacheId());
 	   
 	   return db.insert(TABLE_NAME_NOTES, null, initialValues);
    }
@@ -59,9 +66,10 @@ public class DataHelper {
       this.db.delete(TABLE_NAME_NOTES, null, null);
    }
 
-   public List<Note> selectNotes() {
+   public List<Note> selectNotes(String cacheId) {
 	      List<Note> list = new ArrayList<Note>();
-	      Cursor cursor = this.db.query(TABLE_NAME_NOTES, new String[] { "title","noteText","date" }, null, null, null, null, "date desc");
+	      Cursor cursor = this.db.query(TABLE_NAME_NOTES, new String[] { "title","noteText","date","cacheId" }, 
+	    		  "cacheId like '"+cacheId+"'", null, null, null, "date desc");
 	      if (cursor.moveToFirst()) {
 	         do {
 	        	 Note note = new Note();
@@ -77,6 +85,7 @@ public class DataHelper {
 					e.printStackTrace();
 				}
 	            note.setDate(cal);
+	            note.setCacheId(cursor.getString(3));
 	            
 	            list.add(note);
 	         } while (cursor.moveToNext());
@@ -85,11 +94,12 @@ public class DataHelper {
 	         cursor.close();
 	      }
 	      return list;
-	      }
+	}
 
-   public List<fi.jamk.e6379.Log> selectLogs() {
+	public List<fi.jamk.e6379.Log> selectLogs(String cacheId) {
 	      List<fi.jamk.e6379.Log> list = new ArrayList<fi.jamk.e6379.Log>();
-	      Cursor cursor = this.db.query(TABLE_NAME_LOGS, new String[] { "type","title","noteText","date" }, null, null, null, null, "date desc");
+	      Cursor cursor = this.db.query(TABLE_NAME_LOGS, new String[] { "type","title","noteText","date","cacheId" },
+	    		  "cacheId like '"+cacheId+"'", null, null, null, "date desc");
 	      if (cursor.moveToFirst()) {
 	         do {
 	        	 fi.jamk.e6379.Log log = new fi.jamk.e6379.Log();
@@ -106,6 +116,7 @@ public class DataHelper {
 					e.printStackTrace();
 				}
 	            log.setDate(cal);
+	            log.setCacheId(cursor.getString(4));
 	            
 	            list.add(log);
 	         } while (cursor.moveToNext());
@@ -114,9 +125,25 @@ public class DataHelper {
 	         cursor.close();
 	      }
 	      return list;
-	      }
+	}
    
-   private static class OpenHelper extends SQLiteOpenHelper {
+	public List<String> selectFoundCacheIds() {
+	      List<String> list = new ArrayList<String>();
+	      Cursor cursor = this.db.query(TABLE_NAME_LOGS, new String[] { "type","cacheId" }, null, null, null, null, "date desc");
+	      if (cursor.moveToFirst()) {
+	    	  do {
+				 if(Integer.parseInt(cursor.getString(0)) == fi.jamk.e6379.Log.TYPE_FOUND)
+					 list.add(cursor.getString(1));
+
+	         } while (cursor.moveToNext());
+	      }
+	      if (cursor != null && !cursor.isClosed()) {
+	         cursor.close();
+	      }
+	      return list;
+	}
+	
+	private static class OpenHelper extends SQLiteOpenHelper {
 
       OpenHelper(Context context) {
          super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -124,8 +151,8 @@ public class DataHelper {
 
       @Override
       public void onCreate(SQLiteDatabase db) {
-         db.execSQL("CREATE TABLE " + TABLE_NAME_LOGS + "(id INTEGER PRIMARY KEY, type TEXT, title TEXT, noteText TEXT, date DATETIME)");
-         db.execSQL("CREATE TABLE " + TABLE_NAME_NOTES + "(id INTEGER PRIMARY KEY, title TEXT, noteText TEXT, date DATETIME)");
+         db.execSQL("CREATE TABLE " + TABLE_NAME_LOGS + "(id INTEGER PRIMARY KEY, type TEXT, title TEXT, noteText TEXT, date DATETIME, cacheId TEXT)");
+         db.execSQL("CREATE TABLE " + TABLE_NAME_NOTES + "(id INTEGER PRIMARY KEY, title TEXT, noteText TEXT, date DATETIME, cacheId TEXT)");
       }
 
       @Override

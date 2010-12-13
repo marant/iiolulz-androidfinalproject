@@ -11,47 +11,55 @@ import android.widget.TextView;
 
 public class CacheDetailsActivity extends Activity {
 	private OnClickListener targetButtonListener;
-	public static int index;
 	private Cache cache;
 	private ArrayList<Cache> caches;
 	private Intent callingIntent;
+	private String cacheId;
+	CacheManager cacheManager;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cachedetailslayout);
-		callingIntent = getIntent();
-		
-		CacheManager cacheManager = new CacheManager();
+		cacheManager = new CacheManager();
 		cache = null;
 		
-		caches = cacheManager.getCaches();
-		index = callingIntent.getIntExtra("CacheID", -1);
-		cache = caches.get(index);
+		findViewById(R.id.Button01).setOnClickListener( targetButtonListener );
+		
+		setDetailCache();
+		if(cache != null)
+			updateCacheDetails();
 		
 		targetButtonListener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent();
-				intent.putExtra("CacheID", index);
+				intent.putExtra("CacheId", cache.getId());
 				setResult(RESULT_OK, intent);
 				finish();
 			}
 			
 		};
 		
-		findViewById(R.id.Button01).setOnClickListener( targetButtonListener );
-		updateCacheDetails();
-		
+	}
+	
+	public void setDetailCache(){
+		callingIntent = getIntent();
+		caches = cacheManager.getCaches();
+		cacheId = callingIntent.getStringExtra("cacheId");
+		for (Cache cache : caches){
+			if(cache.getId().equalsIgnoreCase(cacheId)){
+				this.cache = cache;
+			}
+		}
 	}
 	
 	
 	
 	@Override
 	protected void onResume() {
-		callingIntent = getIntent();
-		index = callingIntent.getIntExtra("CacheID", -1);
-		cache = caches.get(index);
-		updateCacheDetails();
+		setDetailCache();
+		if(cache != null)
+			updateCacheDetails();
 		
 		super.onResume();
 	}

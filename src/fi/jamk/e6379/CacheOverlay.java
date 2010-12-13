@@ -36,7 +36,7 @@ public class CacheOverlay extends ItemizedOverlay<OverlayItem> {
 	@Override
 	protected boolean onTap( int index ) {
 		OverlayItem item = mOverlays.get(index);
-		mainActivity.openCacheView(index);
+		mainActivity.openCacheView(item.getTitle());
 		return true;
 	}
 	

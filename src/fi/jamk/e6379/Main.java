@@ -121,6 +121,7 @@ public class Main extends MapActivity implements LocationListener {
 		mapOverlays.remove(foundCacheOverlay);
 		foundCacheOverlay.clear();
 		cacheOverlay.clear();
+		
 		if (caches.isEmpty()) {
 			Toast.makeText(getApplicationContext(), getString(R.string.nocaches_text), Toast.LENGTH_LONG).show();
 			return false;
@@ -141,16 +142,15 @@ public class Main extends MapActivity implements LocationListener {
 				notFoundCaches.add(cache);
 				cacheOverlay.addOverlay( new OverlayItem(point, cache.getId(), "") );
 			}
-			
 		}
 		
 		addOverlaysToMap();
 		return true;
 	}
 	
-	public void openCacheView(int index) {
+	public void openCacheView(String cacheId) {
 		Intent intent = new Intent( Main.this, CacheDetailsActivity.class );
-		intent.putExtra("CacheID", index);
+		intent.putExtra("cacheId", cacheId);
 		startActivityForResult(intent, SET_TARGET_CACHE_REQUEST);
 	}
 	

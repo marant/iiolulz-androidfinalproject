@@ -133,17 +133,15 @@ public class Main extends MapActivity implements LocationListener {
 			int lon = (int) (cache.getLocation().getLongitude()*1000000);
 			int lat = (int) (cache.getLocation().getLatitude()*1000000);
 			GeoPoint point = new GeoPoint(lat, lon);
-			cacheOverlay.addOverlay( new OverlayItem(point, cache.getId(), ""));
-			/*
 			if(foundCacheIds.contains(cache.getId())){
 				foundCaches.add(cache);
 				foundCacheOverlay.addOverlay( new OverlayItem(point, cache.getId(), ""));
 			}
 			else {
-				cacheOverlay.addOverlay( new OverlayItem(point, cache.getId(), "") );
 				notFoundCaches.add(cache);
+				cacheOverlay.addOverlay( new OverlayItem(point, cache.getId(), "") );
 			}
-			*/
+			
 		}
 		
 		addOverlaysToMap();
@@ -247,8 +245,8 @@ public class Main extends MapActivity implements LocationListener {
 	
 	public void addOverlaysToMap(){
 		mapOverlays.add(cacheOverlay);
-		/*if(updateFoundCacheIds())
-			mapOverlays.add(foundCacheOverlay);*/
+		if(updateFoundCacheIds())
+			mapOverlays.add(foundCacheOverlay);
 	}
 	
 

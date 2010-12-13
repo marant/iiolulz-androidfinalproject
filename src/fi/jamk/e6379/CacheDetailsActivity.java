@@ -12,13 +12,15 @@ import android.widget.TextView;
 public class CacheDetailsActivity extends Activity {
 	private OnClickListener targetButtonListener;
 	public static int index;
+	private Cache cache;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.cachedetailslayout);
 		Intent callingIntent = getIntent();
-		Cache cache = null;
+		
 		CacheManager cacheManager = new CacheManager();
+		cache = null;
 		TextView cacheid = (TextView) findViewById(R.id.cacheid_value);
 		TextView cachename = (TextView) findViewById(R.id.cachename_value);
 		TextView cachecreator = (TextView) findViewById( R.id.cachecreator_value );
@@ -49,6 +51,9 @@ public class CacheDetailsActivity extends Activity {
 	
 	public void openAddNoteActivity(View target) {
 		Intent intent = new Intent(CacheDetailsActivity.this, NoteEditActivity.class);
+		if( cache != null ) {
+			intent.putExtra("cacheID", cache.getId() );
+		}
 		startActivity( intent );
 	}
 	

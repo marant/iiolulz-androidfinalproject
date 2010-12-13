@@ -6,6 +6,7 @@ import java.util.Date;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -19,6 +20,12 @@ public class LogActivity extends NoteEditActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.loglayout);
+		Intent intent = getIntent();
+		
+		String cacheId = intent.getStringExtra("cacheId");
+		if( cacheId == null ) {
+			this.finish();
+		}
 	
 		log = new Log();
 		log.setType( Log.TYPE_FOUND );
